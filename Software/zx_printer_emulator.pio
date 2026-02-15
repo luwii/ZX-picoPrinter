@@ -1,0 +1,64 @@
+
+; .program zx_printer_emulator - Ultra-fast ZX Printer port emulation
+; Uses hardware-decoded PRD (Printer READ) and PWR (Printer WRITE) signals
+;
+; Hardware signals (all active LOW):
+;   GPIO 8  (CS):  Chip Select = IORQ OR A2 (printer port access)
+;   GPIO 9  (PRD): Printer READ = IORQ OR RD OR A2 (reading from printer)
+;   GPIO 21 (PWR): Printer WRITE = IORQ OR A2 OR WR (writing to printer)
+;
+; JMP PIN is configured to GPIO 9 (PRD) in C code
+; OSR is preloaded with 0x81 for instant READ response
+; Side-set on GPIO 16: HIGH when PWR is LOW (Pico reading data from Spectrum), LOW otherwise
+
+.program zx_printer_emulator
+.side_set 1 opt
+
+; Load 0x81 from TX FIFO (preloaded by C code) on startup - RUNS ONCE
+    pull block         side 0 ; Pull 0x81 from TX FIFO into OSR (blocks until available)
+    mov y, osr         side 0 ; Y = 0x81 (save for later use)
+
+    ; Set up to drive 0x81 continuously
+    out pins, 8        side 0 ; Drive 0x81 onto data pins
+    mov pindirs, ~null side 0 ; Enable outputs - bus now shows 0x81!
+
+.wrap_target
+main_loop:
+    ; CRITICAL: Check immediately if a transaction is already active!
+    ; Don't wait for idle if ROM already started next operation
+    jmp pin check_write side 0 ; if PRD is HIGH (no read), check for WRITE immediately
+    ; PRD is LOW - READ is already in progress, handle it
+    jmp do_read        side 0 ; go handle the READ
+
+wait_idle:
+    ; Only reach here from .wrap - ensures clean startup
+    ; Ensure both PRD and PWR are HIGH (idle) before checking for next transaction
+    wait 1 gpio 9      side 0 ; wait for PRD to be HIGH (idle)
+    wait 1 gpio 21     side 0 ; wait for PWR to be HIGH (idle)
+    jmp main_loop      side 0 ; now check for transaction
+
+    ; PRD went LOW immediately after idle - this is a READ (Spectrum reading status)
+    ; Data is ALREADY on the bus (0x81)! Just wait for completion
+do_read:
+    wait 1 gpio 9      side 0 ; wait for PRD to go high (read complete)
+    jmp main_loop      side 0 ; back to main loop (check immediately for next op!)
+
+check_write:
+    ; PRD is HIGH, now wait for PWR to go LOW (WRITE operation)
+    wait 0 gpio 21     side 0 ; wait for PWR LOW (blocking)
+
+    ; PWR is LOW - WRITE operation detected! DEBUG HIGH
+    mov pindirs, null  side 1 ; disable outputs (switch to inputs), DEBUG HIGH
+    nop [7]            side 1 ; delay to let Z80 drive bus, DEBUG HIGH
+    in pins, 8         side 1 ; read data byte from bus, DEBUG HIGH
+    wait 1 gpio 21     side 1 ; wait for PWR to go high, DEBUG HIGH
+
+    ; Restore 0x81 output immediately (no encoder delay)
+    mov osr, y         side 0 ; reload 0x81 into OSR
+    out pins, 8        side 0 ; put 0x81 onto output register
+    mov pindirs, ~null side 0 ; re-enable outputs (drive 0x81 again)
+    jmp main_loop      side 0 ; back to main loop (NOT wait_idle - check immediately!)
+
+.wrap
+
+; Note: autopush is configured in C with 8 bits threshold
