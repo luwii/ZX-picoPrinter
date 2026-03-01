@@ -24,8 +24,8 @@ ZX-picoPrinter is a compact and efficient printer solution designed for use with
 5. **Run the Application**: Start the application and test with LPRINT
 
 ## Documentation References
+- [Printer Manual](https://github.com/luwii/ZX-picoPrinter/blob/main/Documentation/zxpicoprinter.pdf)
 - [Raspberry Pi Pico Documentation](https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html)
-- [Thermal Printer Manual](#)
 
 
 ## License
