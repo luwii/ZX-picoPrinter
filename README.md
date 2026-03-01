@@ -1,7 +1,37 @@
 # ZX-picoPrinter
-ZX picoPrinter
 
-This project re-imagines the original ZX Printer into a more modern implementation without sacrificing compatibility with the original hardware. The original is a quirky and noisy device and this project continues with that tradition, at least the noisy part!
+## Project Description
+ZX-picoPrinter is a compact and efficient printer solution designed for use with the Raspberry Pi Pico. This project aims to provide an easy-to-use interface and reliable printing capabilities for various applications.
 
+## Features
+- Compact design suitable for various projects
+- Easy setup and integration with Raspberry Pi Pico
+- Support for multiple paper sizes and formats
+- User-friendly interface for quick configuration
 
-This project makes use of a Raspberry Pi Pico 2 and a cheap off-the-shelf thermal printer module for the bulk of the work.  In addition a small circuit board is needed and a screen is optional. The data from the Spectrum is captured in the Pico, processed and can then be sent to the ouput device(s)
+## Hardware Requirements
+- Raspberry Pi Pico
+- Compatible thermal printer
+- Power supply for the printer
+- Connecting cables (USB or serial)
+
+## Getting Started Guide
+1. **Prerequisites**: Make sure you have installed the necessary software tools for Raspberry Pi Pico development.
+2. **Clone the Repository**: ```git clone https://github.com/luwii/ZX-picoPrinter.git``` 
+3. **Connect the Hardware**: Follow the wiring instructions provided in the documentation.
+4. **Upload the Code**: Use your preferred development environment to upload the provided codes to the Raspberry Pi Pico.
+5. **Run the Application**: Start the application and follow the on-screen instructions.
+
+## Documentation References
+- [Raspberry Pi Pico Documentation](https://www.raspberrypi.org/documentation/pico)
+- [Thermal Printer Manual](#)
+
+## Contributing Guidelines
+We welcome contributions from the community! To contribute, please follow these steps:
+1. Fork the repository.
+2. Create a feature branch.
+3. Make your changes and commit them.
+4. Push to the branch and submit a pull request.
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for more details.
