@@ -1,0 +1,41 @@
+# KiCad
+
+# Backup files
+*.bak
+*.kicad_sch
+*.kicad_pcb
+
+# Temporary files
+*.kicad_temp
+
+# Generated files
+*.drl
+*.gbr
+
+# C/Embedded Development
+
+# Object files
+*.o
+*.obj
+
+# Executables
+*.exe
+*.out
+*.bin
+*.elf
+
+# IDE Files
+
+# Visual Studio Code
+.vscode/
+
+# Eclipse
+.settings/
+
+# OS Files
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
