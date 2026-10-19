@@ -1,11 +1,15 @@
+
+
+
+
 # ZX-picoPrinter
 
 ## Project Description
-ZX-picoPrinter is a compact and efficient printer solution designed for use with the Raspberry Pi Pico. This project aims to provide an easy-to-use interface that is simple to construct.
+ZX-picoPrinter is a compact and  printer solution to replace the ZX Printer. It uses a POS thermal printer and works with LLIST, LPRINT and COPY commands.
+
+https://github.com/user-attachments/assets/79f8de29-5155-4037-83c5-f92d454931f6
 
 ## Features
-- Compact design suitable for various projects
-- Easy setup and integration with Raspberry Pi Pico
 - Optional screen to preview the print
 
 ## Hardware Requirements
