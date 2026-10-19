@@ -1,11 +1,8 @@
 
-
-
-
 # ZX-picoPrinter
 
 ## Project Description
-ZX-picoPrinter is a compact and  printer solution to replace the ZX Printer. It uses a POS thermal printer and works with LLIST, LPRINT and COPY commands.
+ZX-picoPrinter is a DIY replacement for the ZX printer that works with the original Spectrum LPRINT, LLIST and COPY command. It is built on a custom circuit board and a raspberry Pi is used to emulate the printer and inteface with the POS printer and screen.
 
 https://github.com/user-attachments/assets/79f8de29-5155-4037-83c5-f92d454931f6
 
