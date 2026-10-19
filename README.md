@@ -1,7 +1,14 @@
+
+
+
+
+
+
 # ZX-picoPrinter
 
 **ZX-picoPrinter** is a modern hardware emulator and DIY replacement for the vintage Sinclair ZX Printer. Built around a custom circuit board and a Raspberry Pi Pico 2, it restores native printing capabilities to the ZX Spectrum by translating legacy signals for modern thermal POS printers and optional display screens.
 
+https://github.com/user-attachments/assets/f9424bd6-6a39-4c2c-87f9-4fa740e79a30
 https://github.com/user-attachments/assets/79f8de29-5155-4037-83c5-f92d454931f6
 
 ---
